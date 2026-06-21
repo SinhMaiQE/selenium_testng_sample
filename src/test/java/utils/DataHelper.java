@@ -10,7 +10,7 @@ import java.util.Objects;
 public class DataHelper {
 
     private static final String DATA_FILE = "testdata.json";
-    private static JsonObject data;
+    private static final JsonObject data;
 
     static {
         try (Reader reader = new InputStreamReader(

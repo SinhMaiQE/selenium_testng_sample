@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.LogHelper;
 
 import java.util.List;
+import java.util.Objects;
 
 public class BasePage {
 
@@ -118,10 +119,10 @@ public class BasePage {
     }
 
     @Step("Set checkbox to: {checked}")
-    protected void setCheckbox(WebElement checkbox, boolean checked) {
-        LogHelper.info("Setting checkbox to: " + checked);
+    protected void setCheckbox(WebElement checkbox) {
+        LogHelper.info("Setting checkbox to: " + true);
         waitForClickable(checkbox);
-        if (checkbox.isSelected() != checked) {
+        if (!checkbox.isSelected()) {
             checkbox.click();
         }
     }
@@ -156,8 +157,8 @@ public class BasePage {
         return waitForVisible(locator).getText().trim();
     }
 
-    protected String getAttribute(WebElement element, String attribute) {
-        return waitForVisible(element).getAttribute(attribute);
+    protected String getAttribute(WebElement element) {
+        return waitForVisible(element).getAttribute("type");
     }
 
     protected String getCssValue(WebElement element, String property) {
@@ -332,6 +333,6 @@ public class BasePage {
     @Step("Wait for page load to complete")
     public void waitForPageLoad() {
         LogHelper.info("Waiting for page load to complete");
-        wait.until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+        wait.until(webDriver -> Objects.equals(((JavascriptExecutor) webDriver).executeScript("return document.readyState"), "complete"));
     }
 }

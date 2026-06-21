@@ -32,41 +32,36 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Mở trang Login")
-    public LoginPage open() {
+    public void open() {
         navigateTo(utils.DataHelper.get("urls.login"));
-        return this;
     }
 
     @Step("Nhập email: {email}")
-    public LoginPage enterEmail(String email) {
+    public void enterEmail(String email) {
         setText(emailInput, email);
-        return this;
     }
 
     @Step("Nhập password")
-    public LoginPage enterPassword(String password) {
+    public void enterPassword(String password) {
         setText(passwordInput, password);
-        return this;
     }
 
     @Step("Click nút Login")
-    public LoginPage clickLogin() {
+    public void clickLogin() {
         click(loginButton);
-        return this;
     }
 
     @Step("Tick checkbox Remember Me")
     public LoginPage tickRememberMe() {
-        setCheckbox(rememberMeCheckbox, true);
+        setCheckbox(rememberMeCheckbox);
         return this;
     }
 
     @Step("Đăng nhập với email: {email}")
-    public LoginPage performLogin(String email, String password) {
+    public void performLogin(String email, String password) {
         enterEmail(email);
         enterPassword(password);
         clickLogin();
-        return this;
     }
 
     @Step("Lấy thông báo lỗi")
@@ -86,7 +81,7 @@ public class LoginPage extends BasePage {
 
     @Step("Kiểm tra trường Password có ẩn ký tự")
     public boolean isPasswordMasked() {
-        return "password".equals(getAttribute(passwordInput, "type"));
+        return "password".equals(getAttribute(passwordInput));
     }
 
     @Step("Kiểm tra nút Login hiển thị")
